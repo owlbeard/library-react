@@ -49,8 +49,14 @@ export default function Books({ books, set }: BooksProps) {
                   pages: Number(pageRef.current!.value),
                   completion: importanceRef.current!.checked,
                 };
-                set([...books, book]);
-                setOpen(false);
+                const index = books.findIndex(
+                  (item) => item.title === book.title
+                );
+                console.log(index);
+                if (index === -1) {
+                  set([...books, book]);
+                  setOpen(false);
+                } else alert('The book already exists!');
               }}
             >
               <div className="w-full flex flex-col justify-center items-start">
@@ -119,7 +125,7 @@ export default function Books({ books, set }: BooksProps) {
           </div>
         )}
       </AnimatePresence>
-      <div className="flex-grow w-full p-4 gap-4 flex flex-wrap justify-start items-start">
+      <div className="flex-grow w-full p-4 gap-4 flex flex-wrap justify-center items-start">
         <AnimatePresence>
           {books.map((book) => {
             return (
@@ -153,15 +159,12 @@ export default function Books({ books, set }: BooksProps) {
                     onChange={(e) => {
                       const target = e.currentTarget as HTMLInputElement;
                       const value = target.checked;
-                      console.log(value);
                       const newBooks = books.map((item) => {
                         if (item.id === book.id) {
-                          console.log(item);
                           return { ...item, completion: value };
                         }
                         return item;
                       });
-                      console.log(newBooks);
                       set(newBooks);
                     }}
                   />
