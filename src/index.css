@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Handlee', cursive;
+}
+
+.white {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(261deg)
+    brightness(106%) contrast(101%);
+}
